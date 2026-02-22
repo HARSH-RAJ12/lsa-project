@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSA Measurement GAME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img src="assets/sounds/logo.png" alt="LSA Logo" class="app-logo">
+
+    <div id="startScreen" class="overlay">
+        <div class="glass-card">
+            <div class="icon-3d">📐</div>
+            <h1>LSA Game</h1>
+            
+            <div id="authContainer">
+                <input type="text" id="username" placeholder="Agent Name" class="auth-input" style="width:85%; padding:12px; margin:10px 0; border-radius:8px; border:none; background: rgba(255,255,255,0.1); color:white; outline:none;">
+                <input type="password" id="password" placeholder="Pass-key" class="auth-input" style="width:85%; padding:12px; margin:10px 0; border-radius:8px; border:none; background: rgba(255,255,255,0.1); color:white; outline:none;">
+                
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <button class="primary-btn" onclick="handleAuth('login')">LOGIN</button>
+                    <button class="secondary-btn" style="border:1px solid #2ecc71; color:#2ecc71; background:none;" onclick="handleAuth('register')">SIGN UP</button>
+                </div>
+            </div>
+
+            <div id="welcomeMsg" class="hidden">
+                <p>Welcome, <span id="displayUser" style="color:#2ecc71; font-weight:bold;"></span></p>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+                    <button class="primary-btn" onclick="startGame()">START GAME</button>
+                    <button class="secondary-btn" style="border:1px solid #ff4757; color:#ff4757; background:none; padding: 10px 20px;" onclick="logout()">LOGOUT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameContainer" class="hidden">
+        <div class="top-bar">
+            <div class="stat-box">
+                <span class="label">CURRENT SCORE</span>
+                <div id="score">0</div>
+            </div>
+            <div class="stat-box">
+                <span class="label">PROGRESS</span>
+                <div id="level">1 / 100</div>
+            </div>
+            <div class="stat-box highlight">
+                <span class="label">ALL-TIME BEST</span>
+                <div id="highScore">0</div>
+            </div>
+        </div>
+
+        <div class="timer-section">
+            <div id="progressBar"><div id="progress"></div></div>
+            <div class="time-text">Time: <span id="time">300</span>s</div>
+        </div>
+
+        <div class="visual-engine">
+            <div id="questionBox"></div>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-column">
+                <h3>LENGTH (L)</h3>
+                <div id="lengthValues" class="drop-zone-bg"></div>
+            </div>
+            <div class="value-column">
+                <h3>WIDTH (W)</h3>
+                <div id="widthValues" class="drop-zone-bg"></div>
+            </div>
+            <div class="value-column">
+                <h3>HEIGHT (H)</h3>
+                <div id="heightValues" class="drop-zone-bg"></div>
+            </div>
+        </div>
+
+        <div class="footer-ui">
+            <div id="result">Waiting for input...</div>
+            <div class="button-container">
+                <button class="secondary-btn" onclick="resetGame()">RESET</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameOverScreen" class="overlay hidden">
+        <div class="glass-card">
+            <h2 class="danger-text">CRITICAL OVERLOAD</h2>
+            <div class="final-stats">
+                <div>Final Score: <span id="finalScore">0</span></div>
+                <div>Questions Completed: <span id="finalLevel">1</span></div>
+            </div>
+            <div id="leaderboardSection" style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
+                <h3 style="color: #2ecc71;">🏆 TOP AGENTS</h3>
+                <div id="leaderboardList">Fetching secure data...</div>
+            </div>
+            <button class="primary-btn" onclick="location.reload()" style="margin-top: 15px;">RE-AUTHENTICATE</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
