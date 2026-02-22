@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --glass: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+}
+
+/* --- LOGO STYLING --- */
+.app-logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 250px; /* Size thoda bada kiya hai taaki clear dikhe */
+    height: auto;
+    z-index: 2000;
+    pointer-events: none;
+    /* Agar image ka background hai to use hata kar glow dene ke liye */
+    filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6)); 
+    border-radius: 10px; /* Agar logo square hai to thoda round karne ke liye */
+}
+
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: radial-gradient(circle at top right, #1e1b4b, #020617);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; 
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.glass-card {
+    background: var(--glass);
+    padding: 2rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+}
+
+.hidden { display: none !important; }
+
+#gameContainer {
+    width: 100%;
+    max-width: 900px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+}
+
+.top-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.8rem;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.stat-box .label { font-size: 0.65rem; opacity: 0.7; display: block; margin-bottom: 5px; }
+.stat-box div { font-size: 1.2rem; font-weight: 900; }
+
+#progressBar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+#progress {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 1s linear;
+}
+
+#questionBox {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    text-align: center;
+    line-height: 2.2; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.drop-box {
+    display: inline-block;
+    width: 60px;
+    height: 50px;
+    line-height: 50px;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(0,0,0,0.2);
+    vertical-align: middle;
+}
+
+.values-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.value-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.value-column h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.drop-zone-bg {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 15px;
+    min-height: 50px;
+    width: 100%;
+    max-width: fit-content;
+    box-sizing: border-box;
+}
+
+.value-box {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: grab;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 40px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.value-box:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.footer-ui {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#result {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.secondary-btn {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.8rem 2.5rem; 
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1rem; 
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.secondary-btn:hover {
+    background: var(--danger);
+    color: white;
+    transform: scale(1.05);
+}
+
+.primary-btn {
+    background: var(--success);
+    color: #064e3b;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    width: fit-content;
+}
+
+@media (max-width: 768px) {
+    .app-logo { width: 45px; top: 15px; right: 15px; }
+    #gameContainer { padding: 1rem; border-radius: 1.5rem; }
+    .top-bar { gap: 0.5rem; }
+    .stat-box div { font-size: 1rem; }
+    #questionBox { font-size: 1.2rem; padding: 1rem; }
+    .drop-box { width: 50px; height: 45px; line-height: 45px; }
+}
+
+@media (max-width: 480px) {
+    .top-bar { grid-template-columns: 1fr; }
+    .glass-card { padding: 1.5rem; }
+    #questionBox { font-size: 1rem; }
+    .value-box { padding: 6px 12px; min-width: 35px; font-size: 0.8rem; }
+    .secondary-btn { width: 80%; }
+}
