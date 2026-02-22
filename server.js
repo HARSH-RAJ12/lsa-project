@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Audio files range handling fix
+
 app.use((req, res, next) => {
     if (req.url.endsWith('.mp3')) {
         delete req.headers.range;
@@ -19,23 +19,20 @@ app.use((req, res, next) => {
     next();
 });
 
-//Static files 
-app.use(express.static(path.join(__dirname, 'public'), {
-    acceptRanges: false, 
-    etag: false
-}));
 
-// 2. API Routes
 app.use('/api', authRoutes);         
 app.use('/api/game', gameRoutes);   
 
-// 3. Error Handler
-app.use(errorHandler); 
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+// 4. Error Handler
+app.use(errorHandler); 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
